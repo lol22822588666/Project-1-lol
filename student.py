@@ -32,7 +32,8 @@ class Student:
     def __init__(self,name):
         self.name=name
         self.happiness=50
-        self.progress=0
+        self.progress=15
+        self.money = 150
         self.alive=True
 
     def study(self):
@@ -46,6 +47,10 @@ class Student:
         print("GAMING TIME")
         self.happiness+=10
         self.progress-=5
+    def work(self):
+        print("It`s time to waste time in school")
+        self.happiness-=10
+        self.money+=5
     def isAlive(self):
         if self.happiness<=0:
             print("Dead inside zxc ghoul")
@@ -57,15 +62,19 @@ class Student:
         if self.progress<-10:
             print("You faild, now yor`re stupid")
             self.alive = False
+        if self.money<-100:
+            print("Yor`re broke")
+            self.alive = False
     def day(self):
         print("Happines: ",self.happiness)
         print("Studyness: ", self.progress)
     def choice(self, numDay):
         numDay="Day #"+str(numDay)+"of your life"+self.name
         print(f"{numDay:=^50}")
-        rnd=randint(1,3)
+        rnd=randint(1,4)
         if rnd==1: self.study()
         elif rnd==2: self.sleep()
+        elif rnd == 3:self.work()
         else: self.rest()
         self.day()
         self.isAlive()
