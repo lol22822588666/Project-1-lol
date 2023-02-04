@@ -10,7 +10,10 @@ while True:
     rnd = randint(0, len(quest)-1)
     myQ = Opros(quest[rnd])
     myQ.__str__()
-    answer = input("Ответ: ")
+    try:
+        answer = input("Ответ: ")
+    except:
+        print("ОШИБКА 0000")
     if answer == "x":
         print("Всё, довольно")
         break
