@@ -12,15 +12,9 @@ def pars(site = url):
         soup = bs(res.text, features="html.parser")
         soup_list = soup.find_all("section", class_="proposition")
         for i in soup_list:
-            usd = soup.find("span", class_="green")
-            ua = soup.find("span", class_="size16")
-            reg = soup.find("span", class_="region")
-            if usd or ua or reg:
-                usd.get_text(strip = True).replace(" ", "")
-                ua.get_text(strip=True).replace(" ", "")
-                reg.get_text(strip=True).replace(" ", "")
-            else:
-                print("Error 2")
+            usd = soup.find_all("span", class_="green bold size22 tooltip-price")
+            ua = soup.find_all("span", class_="size16")
+            reg = soup.find_all("span", class_="item region")
             inf.append({
                 "title": i.find("h3", class_="proposition_name").get_text(),
                 "link": i.find("a").get("href"),
@@ -30,6 +24,3 @@ def pars(site = url):
             })
     print(inf)
 pars()
-car = ["title", "link", "USD", "UA", "REG"]
-f=pd.DataFrame(data=pars(), columns=car)
-f.to_csv(file, sep=";", encoding="utf8")
